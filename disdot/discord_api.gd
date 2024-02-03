@@ -8,8 +8,6 @@ const BASE_URL := 'https://discord.com/api/v10'
 # - Return types
 #  - Classes
 #   - ...
-# - Static functions
-#  - Static HTTPRequest node
 
 
 # Util
@@ -28,7 +26,7 @@ func _request(url: String, method := HTTPClient.Method.METHOD_GET, custom_header
 	http.queue_free()
 	return r
 
-static func join_url(parts: PackedStringArray) -> String:
+func join_url(parts: PackedStringArray) -> String:
 	const S := '/'
 	var result := ''
 
@@ -41,7 +39,7 @@ static func join_url(parts: PackedStringArray) -> String:
 
 	return result.trim_suffix('/')
 
-static func headers(token: String, json_content := true) -> PackedStringArray:
+func headers(token: String, json_content := true) -> PackedStringArray:
 	var h := PackedStringArray([
 		'Authorization: Bot '+token,
 		'User-Agent: Disdot (https://github.com/Swarkin/Disdot)'
@@ -55,15 +53,15 @@ static func headers(token: String, json_content := true) -> PackedStringArray:
 # Endpoints
 
 func get_guild_application_commands(token: String, app_id: int, guild_id: int, _localizations := false) -> AwaitableHTTPRequest.HTTPResult:
-	@warning_ignore('static_called_on_instance') var url := join_url([BASE_URL,'applications', str(app_id), 'guilds', str(guild_id), 'commands'])
+	var url := join_url([BASE_URL,'applications', str(app_id), 'guilds', str(guild_id), 'commands'])
 
-	@warning_ignore('static_called_on_instance') return await _request(url, HTTPClient.METHOD_GET, headers(token))
+	return await _request(url, HTTPClient.METHOD_GET, headers(token))
 
 @warning_ignore('shadowed_variable_base_class')
 func create_guild_application_command(token: String, app_id: int, guild_id: int, name: String) -> AwaitableHTTPRequest.HTTPResult:
-	@warning_ignore('static_called_on_instance') var url := join_url([BASE_URL, 'applications', str(app_id), 'guilds', str(guild_id), 'commands'])
+	var url := join_url([BASE_URL, 'applications', str(app_id), 'guilds', str(guild_id), 'commands'])
 
-	@warning_ignore('static_called_on_instance') return await _request(url, HTTPClient.METHOD_POST,
+	return await _request(url, HTTPClient.METHOD_POST,
 		headers(token),
 		JSON.stringify({
 			'name': name,
