@@ -1,6 +1,6 @@
-extends HTTPRequest
 class_name AwaitableHTTPRequest
-## Awaitable HTTP Request Node v1.5.1 by swark1n
+extends HTTPRequest
+## Awaitable HTTP Request Node v1.5.2 by swark1n
 
 signal request_finished			## Emits once the current request finishes, right after [member is_requesting] is set to false.
 var is_requesting := false  ## Whether the node is busy performing a request.

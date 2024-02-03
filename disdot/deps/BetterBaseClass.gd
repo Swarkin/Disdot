@@ -1,6 +1,6 @@
-extends RefCounted
 class_name BetterBaseClass
-## BetterBaseClass v1.1.1 by swark1n
+extends RefCounted
+## BetterBaseClass v1.1.2 by swark1n
 
 func _init(dict: Dictionary) -> void:
 	for key: String in dict:
