@@ -2,6 +2,11 @@ class_name User
 extends BetterBaseClass
 ## Users in Discord are generally considered the base entity. Users can spawn across the entire platform, be members of guilds, participate in text and voice chat, and much more. Users are separated by a distinction of "bot" vs "normal." Although they are similar, bot users are automated users that are "owned" by another user. Unlike normal users, bot users do not have a limitation on the number of Guilds they can be a part of.[br][url]https://discord.com/developers/docs/resources/user#user-object[/url]
 
+# TODO
+func _init(dict: Dictionary) -> void:
+	id = dict.get('id', 0) as int
+	username = dict.get('username', '') as String
+
 var id: int										## the user's id
 var username: String					## the user's username, not unique across the platform
 var discriminator: int				## the user's Discord-tag

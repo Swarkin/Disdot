@@ -55,19 +55,15 @@ static func headers(token: String, json_content := true) -> PackedStringArray:
 # Endpoints
 
 func get_guild_application_commands(token: String, app_id: int, guild_id: int, _localizations := false) -> AwaitableHTTPRequest.HTTPResult:
-	@warning_ignore('static_called_on_instance')
-	var url := join_url([BASE_URL,'applications', str(app_id), 'guilds', str(guild_id), 'commands'])
+	@warning_ignore('static_called_on_instance') var url := join_url([BASE_URL,'applications', str(app_id), 'guilds', str(guild_id), 'commands'])
 
-	@warning_ignore('static_called_on_instance')
-	return await _request(url, HTTPClient.METHOD_GET, headers(token))
+	@warning_ignore('static_called_on_instance') return await _request(url, HTTPClient.METHOD_GET, headers(token))
 
 @warning_ignore('shadowed_variable_base_class')
 func create_guild_application_command(token: String, app_id: int, guild_id: int, name: String) -> AwaitableHTTPRequest.HTTPResult:
-	@warning_ignore('static_called_on_instance')
-	var url := join_url([BASE_URL, 'applications', str(app_id), 'guilds', str(guild_id), 'commands'])
+	@warning_ignore('static_called_on_instance') var url := join_url([BASE_URL, 'applications', str(app_id), 'guilds', str(guild_id), 'commands'])
 
-	@warning_ignore('static_called_on_instance')
-	return await _request(url, HTTPClient.METHOD_POST,
+	@warning_ignore('static_called_on_instance') return await _request(url, HTTPClient.METHOD_POST,
 		headers(token),
 		JSON.stringify({
 			'name': name,

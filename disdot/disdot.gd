@@ -2,6 +2,9 @@ extends Node
 class_name Disdot
 ## [url]https://discord.com/developers/docs/topics/gateway#connections[/url]
 
+signal bot_ready(event: ReadyEvent)
+signal message_create(event: MessageCreateEvent)
+
 enum Op {
 	Invalid = -1,
 	Dispatch = 0,
@@ -9,19 +12,20 @@ enum Op {
 	Identify = 2,
 	PresenceUpdate = 3,
 	VoiceStateUpdate = 4,
+
 	Resume = 6,
 	Reconnect = 7,
 	RequestGuildMembers = 8,
 	InvalidSession = 9,
 	Hello = 10,
-	HeartbeatACK = 11
-}
+	HeartbeatACK = 11}
 class Event:
 	const Ready := 'READY'
 	const MessageCreate := 'MESSAGE_CREATE'
 
 const BASE_URL := 'https://discord.com/api/v10'
 @export var verbose := true
+
 var _http: AwaitableHTTPRequest
 var _socket: BetterWebsocket
 var _heartbeat_timer: Timer
@@ -29,6 +33,26 @@ var _token: String
 var _app_id: int
 var _socket_url: String
 var _last_seq_num: int
+
+func _init() -> void:
+	_http = AwaitableHTTPRequest.new()
+	_http.accept_gzip = false
+	_http.timeout = 10.0
+
+	_socket = BetterWebsocket.new()
+	_socket.verbose = true
+	_socket.packet_received.connect(_on_packet_received)
+	_socket.state_changed.connect(_on_state_changed)
+
+	_heartbeat_timer = Timer.new()
+	_heartbeat_timer.timeout.connect(_heartbeat)
+
+	for n: Node in [_http, _socket, _heartbeat_timer]:
+		add_child(n)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed('ui_cancel'):
+		stop()
 
 
 func start(token: String, app_id: int) -> void:
@@ -52,32 +76,12 @@ func stop() -> void:
 	_socket.close_connection()
 
 
-func _init() -> void:
-	_http = AwaitableHTTPRequest.new()
-	_http.accept_gzip = false
-	_http.timeout = 10.0
-
-	_socket = BetterWebsocket.new()
-	_socket.verbose = true
-	_socket.packet_received.connect(_on_packet_received)
-	_socket.state_changed.connect(_on_state_changed)
-
-	_heartbeat_timer = Timer.new()
-	_heartbeat_timer.timeout.connect(_heartbeat)
-
-	for n: Node in [_http, _socket, _heartbeat_timer]:
-		add_child(n)
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed('ui_cancel'):
-		stop()
-
 func _on_packet_received(p: PackedByteArray) -> void:
 	var packet_str := p.get_string_from_utf8()
 	print_rich('[color=dimgray]Packet received: ', packet_str, '[/color]')
 
 	var json := JSON.parse_string(packet_str) as Dictionary
-	json.erase('_trace')
+	strip_packet_recursive(json, '_trace')
 
 	var op := json.get('op', -1) as Op
 	assert(not op == -1)
@@ -97,14 +101,11 @@ func _on_packet_received(p: PackedByteArray) -> void:
 			match event_name:
 				Event.Ready:
 					var event := ReadyEvent.new(event_data)
-					await get_tree().create_timer(3.0).timeout
-					stop()
-
 					print(event)
-					pass
 
-				#Event.MessageCreate:
-				#	pass
+				Event.MessageCreate:
+					var event := MessageCreateEvent.new(event_data)
+					print(event)
 
 				_:
 					if verbose: print('└─────── Unhandled ────────┘')
@@ -164,3 +165,22 @@ func _update_seq_num(num: Variant) -> void:
 			push_warning('Missed a sequence number!')
 
 		_last_seq_num = num
+
+
+func strip_packet_recursive(d: Dictionary, rm_key: String) -> void:
+	d.erase(rm_key)
+
+	for key: String in d.keys():
+		var val := d[key] as Variant
+
+		if val is Dictionary:
+			strip_packet_recursive(val as Dictionary, rm_key)
+		elif val is Array:
+			walk_array(val as Array, rm_key)
+
+func walk_array(arr: Array, rm_key: String) -> void:
+	for val: Variant in arr:
+		if val is Dictionary:
+			strip_packet_recursive(val as Dictionary, rm_key)
+		elif val is Array:
+			walk_array(val as Array, rm_key)
