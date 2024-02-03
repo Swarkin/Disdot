@@ -1,6 +1,6 @@
 extends RefCounted
-class_name DictConstructor
-## DictConstructor Class v1.0.0 by swark1n
+class_name BetterBaseClass
+## BetterBaseClass Class v1.0.0 by swark1n
 
 func _init(dict: Dictionary) -> void:
 	for key: String in dict:
@@ -37,3 +37,14 @@ func _init(dict: Dictionary) -> void:
 
 		# Finally:
 		self[key] = dict[key]
+
+func _to_string() -> String:
+	const SEP := ', '
+	var s := (get_script() as Script).get_global_name()+': '
+	var p_list := get_property_list()
+
+	for p in p_list:
+		if p.get('usage') == PROPERTY_USAGE_SCRIPT_VARIABLE:
+			s += p.get('name')+' = '+str(self[p.get('name')])+SEP
+
+	return s.trim_suffix(SEP)
