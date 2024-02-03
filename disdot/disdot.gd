@@ -78,7 +78,7 @@ func stop() -> void:
 
 func _on_packet_received(p: PackedByteArray) -> void:
 	var packet_str := p.get_string_from_utf8()
-	print_rich('[color=dimgray]Packet received: ', packet_str, '[/color]')
+	print_rich('[color=webgray]Packet received: ', packet_str, '[/color]')
 
 	var json := JSON.parse_string(packet_str) as Dictionary
 	strip_packet_recursive(json, '_trace')
@@ -165,7 +165,8 @@ func _update_seq_num(num: Variant) -> void:
 			push_warning('Missed a sequence number!')
 
 		_last_seq_num = num
-
+		if verbose:
+			print_rich('[color=dimgray]Sequence number: ', num, '[/color]')
 
 func strip_packet_recursive(d: Dictionary, rm_key: String) -> void:
 	d.erase(rm_key)
