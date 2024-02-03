@@ -2,7 +2,7 @@ extends Node
 class_name Disdot
 ## [url]https://discord.com/developers/docs/topics/gateway#connections[/url]
 
-signal bot_ready
+#signal bot_ready
 enum Op {
 	Invalid = -1,
 	Dispatch = 0,
@@ -17,6 +17,10 @@ enum Op {
 	Hello = 10,
 	HeartbeatACK = 11
 }
+class Event:
+	const Ready := 'READY'
+	const MessageCreate := 'MESSAGE_CREATE'
+
 const BASE_URL := 'https://discord.com/api/v10'
 @export var verbose := true
 var _http: AwaitableHTTPRequest
@@ -90,13 +94,14 @@ func _on_packet_received(p: PackedByteArray) -> void:
 			print('Received Event | Name: ', event_name, ', Data: ', event_data)
 
 			match event_name:
-				'MESSAGE_CREATE':
-					var content := event_data.get('content') as String
-					var author := (event_data.get('author') as Dictionary).get('username') as String
+				'READY':
+					pass
 
-					var label := Label.new()
-					label.text = author+': '+content
-					$VBoxContainer.add_child(label)
+				'MESSAGE_CREATE':
+					pass
+
+					#var content := event_data.get('content') as String
+					#var author := (event_data.get('author') as Dictionary).get('username') as String
 				_:
 					print('Event unhandled')
 
