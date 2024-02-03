@@ -20,6 +20,10 @@ boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 
+[audio]
+
+driver/driver="Dummy"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=1
