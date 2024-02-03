@@ -1,5 +1,5 @@
-extends Node
 class_name DiscordAPI
+extends Node
 
 const BASE_URL := 'https://discord.com/api/v10'
 

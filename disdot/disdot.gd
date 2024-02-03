@@ -1,5 +1,5 @@
-extends Node
 class_name Disdot
+extends Node
 ## [url]https://discord.com/developers/docs/topics/gateway#connections[/url]
 
 signal bot_ready(event: ReadyEvent)
