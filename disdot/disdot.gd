@@ -2,7 +2,6 @@ extends Node
 class_name Disdot
 ## [url]https://discord.com/developers/docs/topics/gateway#connections[/url]
 
-#signal bot_ready
 enum Op {
 	Invalid = -1,
 	Dispatch = 0,
@@ -33,8 +32,7 @@ var _last_seq_num: int
 
 
 func start(token: String, app_id: int) -> void:
-	if verbose:
-		print('Starting')
+	if verbose: print('Starting')
 
 	_token = token
 	_app_id = app_id
@@ -43,14 +41,12 @@ func start(token: String, app_id: int) -> void:
 	assert(r.success and r.status_code == 200, 'Gateway URL request failed')
 
 	_socket_url = (r.json as Dictionary).get('url') as String + '/?v=10&encoding=json'
-	if verbose:
-		print('Websocket URL: ', _socket_url)
+	if verbose: print('Websocket URL: ', _socket_url)
 
 	_socket.begin_connection(_socket_url)
 
 func stop() -> void:
-	if verbose:
-		print('Stopping')
+	if verbose: print('Stopping')
 
 	_heartbeat_timer.stop()
 	_socket.close_connection()
@@ -78,9 +74,11 @@ func _input(event: InputEvent) -> void:
 
 func _on_packet_received(p: PackedByteArray) -> void:
 	var packet_str := p.get_string_from_utf8()
-	print('Packet received: ', packet_str)
+	print_rich('[color=dimgray]Packet received: ', packet_str, '[/color]')
 
 	var json := JSON.parse_string(packet_str) as Dictionary
+	json.erase('_trace')
+
 	var op := json.get('op', -1) as Op
 	assert(not op == -1)
 
@@ -91,23 +89,31 @@ func _on_packet_received(p: PackedByteArray) -> void:
 			var event_data := json.get('d') as Dictionary
 			var event_name := json.get('t') as String
 
-			print('Received Event | Name: ', event_name, ', Data: ', event_data)
+			if verbose:
+				print('┌───── Received Event ─────┐')
+				print('│ Name: ', event_name)
+				print('│ ', event_data)
 
 			match event_name:
-				'READY':
+				Event.Ready:
+					var event := ReadyEvent.new(event_data)
+					await get_tree().create_timer(3.0).timeout
+					stop()
+
+					print(event)
 					pass
 
-				'MESSAGE_CREATE':
-					pass
+				#Event.MessageCreate:
+				#	pass
 
-					#var content := event_data.get('content') as String
-					#var author := (event_data.get('author') as Dictionary).get('username') as String
 				_:
-					print('Event unhandled')
+					if verbose: print('└─────── Unhandled ────────┘')
+					return
+
+			if verbose: print('└──────────────────────────┘')
 
 		Op.Hello:
-			if verbose:
-				print('Hello Event received')
+			if verbose: print('Hello Event received')
 			var d := json.get('d') as Dictionary
 
 			var interval_s := (d.get('heartbeat_interval') as int) * 0.001
@@ -116,23 +122,20 @@ func _on_packet_received(p: PackedByteArray) -> void:
 			_heartbeat()
 			_identify()
 
-			if verbose:
-				print('Starting Heartbeat Timer with interval ', interval_s)
+			if verbose: print('Starting Heartbeat Timer with interval ', interval_s, 's')
 			_heartbeat_timer.start(interval_s)
 
 		Op.HeartbeatACK:
-			if verbose:
-				print('Heartbeat ACK received')
+			if verbose: print('Heartbeat ACK received')
 
 		_:
-			print('Received unhandled Op: ', op)
+			print('Unhandled Opcode: ', op)
 
 func _on_state_changed(state: WebSocketPeer.State) -> void:
 	print('Websocket state changed: ', state)
 
 func _heartbeat() -> void:
-	if verbose:
-		print('Heartbeat')
+	if verbose: print('Heartbeat')
 
 	@warning_ignore('incompatible_ternary')
 	_socket.send_packet(JSON.stringify({
@@ -140,8 +143,7 @@ func _heartbeat() -> void:
 	)
 
 func _identify() -> void:
-	if verbose:
-		print('Identify')
+	if verbose: print('Identify')
 
 	_socket.send_packet(JSON.stringify({
 		'op': Op.Identify,
