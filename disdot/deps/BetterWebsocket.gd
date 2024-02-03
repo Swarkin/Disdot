@@ -1,7 +1,7 @@
 @icon('res://classes/BetterWebsocket.svg')
 class_name BetterWebsocket
 extends Node
-## Better Websocket Node v1.0.2 by swark1n
+## BetterWebsocket v1.0.2 by swark1n
 
 signal connected
 signal disconnected

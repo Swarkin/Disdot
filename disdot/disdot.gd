@@ -101,11 +101,11 @@ func _on_packet_received(p: PackedByteArray) -> void:
 			match event_name:
 				Event.Ready:
 					var event := ReadyEvent.new(event_data)
-					print(event)
+					bot_ready.emit(event)
 
 				Event.MessageCreate:
 					var event := MessageCreateEvent.new(event_data)
-					print(event)
+					message_create.emit(event)
 
 				_:
 					if verbose: print('└─────── Unhandled ────────┘')
@@ -114,7 +114,7 @@ func _on_packet_received(p: PackedByteArray) -> void:
 			if verbose: print('└──────────────────────────┘')
 
 		Op.Hello:
-			if verbose: print('Hello Event received')
+			if verbose: print('Hello Opcode received')
 			var d := json.get('d') as Dictionary
 
 			var interval_s := (d.get('heartbeat_interval') as int) * 0.001

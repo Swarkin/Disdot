@@ -16,3 +16,6 @@ script = ExtResource("2_qxrsa")
 script = ExtResource("4_vyixc")
 disdot = NodePath("../Disdot")
 discord_api = NodePath("../DiscordAPI")
+
+[connection signal="bot_ready" from="Disdot" to="User" method="_on_disdot_bot_ready"]
+[connection signal="message_create" from="Disdot" to="User" method="_on_disdot_message_create"]
