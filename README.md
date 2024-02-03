@@ -1,11 +1,21 @@
-# Disdot: A small-scale Discord bot library written in GDScript
+# Disdot: Discord bot library written in GDScript
+<sup>Currently using Godot 4.3.dev2</sup>
 
 > [!WARNING]  
-> Just like most of my other projects, this is still in early development and barely has any function.
+> Just like most of my other projects, this is still in early development.
 
-### QnA
-Why does the code look so messy in some places?<br>
-Static typing can improve performance by quite a bit, and I'm trying my best to avoid dynamic typing.
+---
+
+## Features
+
+### Events
+
+| Name | Implemented |
+| --- | --- |
+| `READY`  | ✅ |
+| `MESSAGE_CREATE`  | ✅ |
+| `MESSAGE_UPDATE` | 🔁 |
+| `MESSAGE_DELETE` | 🔁 |
 
 ---
 
