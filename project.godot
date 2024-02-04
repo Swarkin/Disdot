@@ -35,7 +35,7 @@ gdscript/warnings/inference_on_variant=0
 
 [display]
 
-window/size/viewport_width=800
+window/size/viewport_width=1200
 window/size/viewport_height=600
 window/vsync/vsync_mode=0
 
@@ -58,3 +58,7 @@ common/enable_object_picking=false
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+driver/depth_prepass/enable=false
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+environment/defaults/default_clear_color=Color(0.192157, 0.2, 0.219608, 1)

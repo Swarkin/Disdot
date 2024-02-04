@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckriojympegml"]
 
 [ext_resource type="Script" path="res://disdot/disdot.gd" id="1_s6g8u"]
-[ext_resource type="Script" path="res://user.gd" id="4_vyixc"]
+[ext_resource type="Script" path="res://usage.gd" id="4_vyixc"]
 
 [node name="Main" type="Node"]
 
 [node name="Disdot" type="Node" parent="."]
 script = ExtResource("1_s6g8u")
 
-[node name="User" type="Node" parent="." node_paths=PackedStringArray("disdot")]
+[node name="Usage" type="Node" parent="." node_paths=PackedStringArray("disdot")]
 script = ExtResource("4_vyixc")
 disdot = NodePath("../Disdot")
 
-[connection signal="bot_ready" from="Disdot" to="User" method="_on_disdot_bot_ready"]
-[connection signal="message_create" from="Disdot" to="User" method="_on_disdot_message_create"]
+[connection signal="bot_ready" from="Disdot" to="Usage" method="_on_disdot_bot_ready"]
+[connection signal="message_create" from="Disdot" to="Usage" method="_on_disdot_message_create"]

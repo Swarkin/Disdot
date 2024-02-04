@@ -43,6 +43,10 @@ func _init(dict: Dictionary) -> void:
 		# Finally:
 		self[key] = dict[key]
 
+func _safe_get(d: Dictionary, key: String, default: Variant) -> Variant:
+	var v := d.get(key)
+	return v if v else default
+
 func _to_string() -> String:
 	const SEP := ', '
 	var s := (get_script() as Script).get_global_name()+': '

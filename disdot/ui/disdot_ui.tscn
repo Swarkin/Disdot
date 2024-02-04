@@ -1,8 +1,121 @@
-[gd_scene load_steps=2 format=3 uid="uid://cj1klht1odc8l"]
+[gd_scene load_steps=34 format=3 uid="uid://cj1klht1odc8l"]
 
 [ext_resource type="Script" path="res://disdot/ui/disdot_ui.gd" id="1_5xdif"]
+[ext_resource type="Script" path="res://disdot/ui/ui_guilds.gd" id="2_21l7n"]
+[ext_resource type="Script" path="res://disdot/ui/ui_user.gd" id="2_afakb"]
+[ext_resource type="Texture2D" uid="uid://b3wavrnb33rnf" path="res://disdot/ui/icons/home.svg" id="2_b2plu"]
+[ext_resource type="Texture2D" uid="uid://vi70sgdmh2go" path="res://disdot/ui/icons/microphone.svg" id="3_xc741"]
+[ext_resource type="Texture2D" uid="uid://bqja7dxqqv66e" path="res://disdot/ui/icons/microphone-off.svg" id="4_d82o1"]
+[ext_resource type="Texture2D" uid="uid://dxextkr2l2j6l" path="res://disdot/ui/icons/headphones.svg" id="5_1de62"]
+[ext_resource type="Texture2D" uid="uid://cns1kq0k6mdi0" path="res://disdot/ui/icons/user.svg" id="5_nmju5"]
+[ext_resource type="Texture2D" uid="uid://dvhqibrwvlt0d" path="res://disdot/ui/icons/headphones-off.svg" id="6_38n5y"]
+[ext_resource type="Texture2D" uid="uid://djot1h8uakjq2" path="res://disdot/ui/icons/settings.svg" id="7_3cvil"]
+[ext_resource type="Texture2D" uid="uid://cvq1nboe3iga" path="res://disdot/ui/icons/hash.svg" id="11_pyu3l"]
+[ext_resource type="Texture2D" uid="uid://0pwjmge3d5s3" path="res://disdot/ui/icons/plus.svg" id="12_w41mm"]
+[ext_resource type="Texture2D" uid="uid://n3a54mkog61h" path="res://disdot/ui/icons/send.svg" id="13_6lxs3"]
+[ext_resource type="Texture2D" uid="uid://bvutmmpsjuice" path="res://disdot/ui/icons/users.svg" id="13_d36f8"]
 
-[node name="DisdotUI" type="HBoxContainer"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5q8fn"]
+bg_color = Color(0.117647, 0.121569, 0.133333, 1)
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_untu4"]
+bg_color = Color(0.192157, 0.2, 0.219608, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_grkj6"]
+color = Color(0.207843, 0.211765, 0.235294, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_isy66"]
+bg_color = Color(0.168627, 0.176471, 0.192157, 1)
+border_width_bottom = 2
+border_color = Color(0.121569, 0.12549, 0.137255, 1)
+border_blend = true
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_58c6q"]
+line_spacing = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bofje"]
+bg_color = Color(0.168627, 0.176471, 0.192157, 1)
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dlrhx"]
+content_margin_top = 10.0
+bg_color = Color(0.137255, 0.141176, 0.156863, 1)
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_042u3"]
+bg_color = Color(0.192157, 0.2, 0.219608, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_yo8fa"]
+line_spacing = 0.0
+font_size = 12
+font_color = Color(0.94902, 0.952941, 0.960784, 1)
+outline_size = 1
+outline_color = Color(1, 1, 1, 0.294118)
+
+[sub_resource type="LabelSettings" id="LabelSettings_adi7l"]
+line_spacing = 0.0
+font_size = 10
+font_color = Color(0.709804, 0.729412, 0.756863, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ewgfk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xphgs"]
+bg_color = Color(0.192157, 0.2, 0.219608, 1)
+border_width_bottom = 2
+border_color = Color(0.121569, 0.12549, 0.137255, 1)
+border_blend = true
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_4w1xn"]
+line_spacing = 0.0
+outline_size = 1
+outline_color = Color(1, 1, 1, 0.588235)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_lhc4d"]
+color = Color(0.247059, 0.254902, 0.278431, 1)
+grow_begin = 0.0
+grow_end = 0.0
+vertical = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_httmb"]
+line_spacing = 0.0
+font_size = 12
+font_color = Color(0.709804, 0.729412, 0.756863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mrrj7"]
+bg_color = Color(0.219608, 0.227451, 0.25098, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k2mns"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4pnmy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_be73g"]
+bg_color = Color(0.168627, 0.176471, 0.192157, 1)
+corner_detail = 1
+anti_aliasing = false
+
+[node name="DisdotUI" type="HBoxContainer" node_paths=PackedStringArray("ui_user", "ui_guilds")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,18 +123,387 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 script = ExtResource("1_5xdif")
+ui_user = NodePath("Sidebar/User")
+ui_guilds = NodePath("Guilds")
 
-[node name="Servers" type="ColorRect" parent="."]
+[node name="Guilds" type="Panel" parent="." node_paths=PackedStringArray("_container")]
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
-color = Color(0.117647, 0.121569, 0.133333, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_5q8fn")
+script = ExtResource("2_21l7n")
+_container = NodePath("Scroll/VBox/Guilds")
+metadata/_edit_group_ = true
 
-[node name="Channels" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(240, 0)
+[node name="Scroll" type="ScrollContainer" parent="Guilds"]
 layout_mode = 2
-color = Color(0.168627, 0.176471, 0.192157, 1)
+offset_right = 72.0
+offset_bottom = 600.0
+follow_focus = true
+vertical_scroll_mode = 3
 
-[node name="Content" type="ColorRect" parent="."]
+[node name="VBox" type="VBoxContainer" parent="Guilds/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(0.192157, 0.2, 0.219608, 1)
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Spacer" type="Control" parent="Guilds/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="Home" type="Panel" parent="Guilds/Scroll/VBox"]
+clip_children = 2
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_untu4")
+
+[node name="TextureRect" type="TextureRect" parent="Guilds/Scroll/VBox/Home"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_b2plu")
+stretch_mode = 3
+
+[node name="Separator" type="HSeparator" parent="Guilds/Scroll/VBox"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_grkj6")
+
+[node name="Guilds" type="VBoxContainer" parent="Guilds/Scroll/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Sidebar" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="Panel" parent="Sidebar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_isy66")
+metadata/_edit_group_ = true
+
+[node name="Margin" type="MarginContainer" parent="Sidebar/Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="Title" type="Label" parent="Sidebar/Header/Margin"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Title"
+label_settings = SubResource("LabelSettings_58c6q")
+
+[node name="Channels" type="Panel" parent="Sidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_bofje")
+
+[node name="Margin" type="MarginContainer" parent="Sidebar/Channels"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="Scroll" type="ScrollContainer" parent="Sidebar/Channels/Margin"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Sidebar/Channels/Margin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="User" type="Panel" parent="Sidebar" node_paths=PackedStringArray("profile_picture_rect", "username_label", "status_label")]
+custom_minimum_size = Vector2(240, 53)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_dlrhx")
+script = ExtResource("2_afakb")
+profile_picture_rect = NodePath("Margin/HBox/Mask/Picture")
+username_label = NodePath("Margin/HBox/VBox/Username")
+status_label = NodePath("Margin/HBox/VBox/Status")
+metadata/_edit_group_ = true
+
+[node name="Margin" type="MarginContainer" parent="Sidebar/User"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="Sidebar/User/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Mask" type="Panel" parent="Sidebar/User/Margin/HBox"]
+clip_children = 2
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_042u3")
+
+[node name="Picture" type="TextureRect" parent="Sidebar/User/Margin/HBox/Mask"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("5_nmju5")
+stretch_mode = 3
+
+[node name="VBox" type="VBoxContainer" parent="Sidebar/User/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Username" type="Label" parent="Sidebar/User/Margin/HBox/VBox"]
+layout_mode = 2
+text = "Username"
+label_settings = SubResource("LabelSettings_yo8fa")
+text_overrun_behavior = 3
+
+[node name="Status" type="Label" parent="Sidebar/User/Margin/HBox/VBox"]
+layout_mode = 2
+text = "Status"
+label_settings = SubResource("LabelSettings_adi7l")
+
+[node name="Controls" type="HBoxContainer" parent="Sidebar/User/Margin/HBox"]
+modulate = Color(0.709804, 0.729412, 0.756863, 1)
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="Mute" type="TextureButton" parent="Sidebar/User/Margin/HBox/Controls"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource("3_xc741")
+texture_pressed = ExtResource("4_d82o1")
+stretch_mode = 3
+
+[node name="Deafen" type="TextureButton" parent="Sidebar/User/Margin/HBox/Controls"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource("5_1de62")
+texture_pressed = ExtResource("6_38n5y")
+stretch_mode = 3
+
+[node name="Settings" type="TextureButton" parent="Sidebar/User/Margin/HBox/Controls"]
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("7_3cvil")
+stretch_mode = 3
+
+[node name="Content" type="Panel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ewgfk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="Panel" parent="Content/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xphgs")
+metadata/_edit_group_ = true
+
+[node name="Margin" type="MarginContainer" parent="Content/VBoxContainer/Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="Content/VBoxContainer/Header/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ChannelIcon" type="TextureRect" parent="Content/VBoxContainer/Header/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("11_pyu3l")
+stretch_mode = 3
+
+[node name="Title" type="Label" parent="Content/VBoxContainer/Header/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Title"
+label_settings = SubResource("LabelSettings_4w1xn")
+vertical_alignment = 1
+
+[node name="Separator" type="VSeparator" parent="Content/VBoxContainer/Header/Margin/HBox"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxLine_lhc4d")
+
+[node name="Topic" type="Label" parent="Content/VBoxContainer/Header/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Topic"
+label_settings = SubResource("LabelSettings_httmb")
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="ToggleMembers" type="TextureButton" parent="Content/VBoxContainer/Header/Margin/HBox"]
+modulate = Color(0.709804, 0.729412, 0.756863, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("13_d36f8")
+
+[node name="HBox" type="HBoxContainer" parent="Content/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Chat" type="VBoxContainer" parent="Content/VBoxContainer/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Padding" type="MarginContainer" parent="Content/VBoxContainer/HBox/Chat"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 4
+
+[node name="Scroll" type="ScrollContainer" parent="Content/VBoxContainer/HBox/Chat/Padding"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 2
+
+[node name="Messages" type="VBoxContainer" parent="Content/VBoxContainer/HBox/Chat/Padding/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+metadata/_edit_group_ = true
+
+[node name="Margin" type="MarginContainer" parent="Content/VBoxContainer/HBox/Chat"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 24
+
+[node name="MessageBar" type="PanelContainer" parent="Content/VBoxContainer/HBox/Chat/Margin"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mrrj7")
+metadata/_edit_group_ = true
+
+[node name="Margin" type="MarginContainer" parent="Content/VBoxContainer/HBox/Chat/Margin/MessageBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="Content/VBoxContainer/HBox/Chat/Margin/MessageBar/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Upload" type="TextureButton" parent="Content/VBoxContainer/HBox/Chat/Margin/MessageBar/Margin/HBox"]
+modulate = Color(0.709804, 0.729412, 0.756863, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("12_w41mm")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="TextEdit" type="TextEdit" parent="Content/VBoxContainer/HBox/Chat/Margin/MessageBar/Margin/HBox"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_placeholder_color = Color(0.427451, 0.435294, 0.470588, 1)
+theme_override_colors/selection_color = Color(0.0431373, 0.25098, 0.670588, 1)
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_k2mns")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4pnmy")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_4pnmy")
+placeholder_text = "Message"
+context_menu_enabled = false
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+caret_move_on_right_click = false
+caret_multiple = false
+
+[node name="Send" type="TextureButton" parent="Content/VBoxContainer/HBox/Chat/Margin/MessageBar/Margin/HBox"]
+modulate = Color(0.709804, 0.729412, 0.756863, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("13_6lxs3")
+ignore_texture_size = true
+
+[node name="Members" type="Panel" parent="Content/VBoxContainer/HBox"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_be73g")
+metadata/_edit_group_ = true
+
+[connection signal="toggled" from="Content/VBoxContainer/Header/Margin/HBox/ToggleMembers" to="Content/VBoxContainer/HBox/Members" method="set_visible"]
