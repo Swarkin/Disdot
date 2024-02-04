@@ -60,7 +60,7 @@ func headers(json_content := true) -> PackedStringArray:
 
 
 func create_message(channel_id: int, content: String) -> AwaitableHTTPRequest.HTTPResult:
-	var url := join_url([BASE_URL, 'channels', str(channel_id)])
+	var url := join_url([BASE_URL, 'channels', str(channel_id), 'messages'])
 
 	return await _request(url, HTTPClient.METHOD_POST, headers(),
 		JSON.stringify({
