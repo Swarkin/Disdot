@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj1klht1odc8l"]
+
+[ext_resource type="Script" path="res://disdot/ui/disdot_ui.gd" id="1_5xdif"]
+
+[node name="DisdotUI" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_5xdif")
+
+[node name="Servers" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+color = Color(0.117647, 0.121569, 0.133333, 1)
+
+[node name="Channels" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+color = Color(0.168627, 0.176471, 0.192157, 1)
+
+[node name="Content" type="ColorRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.192157, 0.2, 0.219608, 1)
