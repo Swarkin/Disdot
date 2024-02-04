@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlo1kkcu0raby"]
+
+[ext_resource type="Script" path="res://usage.gd" id="1_fp1o7"]
+[ext_resource type="Script" path="res://disdot/disdot.gd" id="1_r2b72"]
+[ext_resource type="PackedScene" uid="uid://cj1klht1odc8l" path="res://disdot/ui/disdot_ui.tscn" id="2_uvkmi"]
+
+[node name="Main UI" type="Node" node_paths=PackedStringArray("disdot")]
+script = ExtResource("1_fp1o7")
+disdot = NodePath("Disdot")
+
+[node name="Disdot" type="Node" parent="."]
+script = ExtResource("1_r2b72")
+
+[node name="DisdotUI" parent="." node_paths=PackedStringArray("disdot", "ui_user", "ui_guilds") instance=ExtResource("2_uvkmi")]
+disdot = NodePath("../Disdot")
+ui_user = NodePath("Sidebar/User")
+ui_guilds = NodePath("Guilds")

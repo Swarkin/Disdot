@@ -2,6 +2,23 @@ class_name Guild
 extends BetterBaseClass
 ## Guilds in Discord represent an isolated collection of users and channels, and are often referred to as "servers" in the UI.[br][url]https://discord.com/developers/docs/resources/guild[/url]
 
+# TODO
+func _init(d: Dictionary) -> void:
+	id = _safe_get(d, 'id', 0) as int
+	name = _safe_get(d, 'name', '') as String
+
+
+
+
+
+	owner_id = _safe_get(d, 'owner_id', 0) as int
+
+	region = _safe_get(d, 'region','') as String
+	afk_channel_id = _safe_get(d, 'afk_channel_id', 0) as int
+	afk_timeout = _safe_get(d, 'afk_timeout', 0) as int
+
+	#...
+
 var id: int																## guild id
 var name: String													## guild name (2-100 characters, excluding trailing and leading whitespace)
 var icon: String													## icon hash

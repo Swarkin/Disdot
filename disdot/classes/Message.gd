@@ -3,10 +3,10 @@ extends BetterBaseClass
 ## Represents a message sent in a channel within Discord.
 
 # TODO
-func _init(dict: Dictionary) -> void:
-	id = dict.get('id', 0) as int
-	author = dict.get('author', {}) as Dictionary
-	content = dict.get('content', '') as String
+func _init(d: Dictionary) -> void:
+	id = _safe_get(d, 'id', 0) as int
+	author = _safe_get(d, 'author', {}) as Dictionary
+	content = _safe_get(d, 'content', '') as String
 
 var id: int
 var channel_id: int
