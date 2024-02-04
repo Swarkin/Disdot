@@ -22,9 +22,6 @@ func _ready() -> void:
 
 func _on_disdot_bot_ready(event: ReadyEvent) -> void:
 	pass
-	print('Trying to send message')
-	var r := await disdot._api.create_message(1197089702789009458, 'Test')
-	breakpoint
 
 func _on_disdot_message_create(event: MessageCreateEvent) -> void:
 	pass
