@@ -2,6 +2,9 @@ class_name Disdot
 extends Node
 ## [url]https://discord.com/developers/docs/topics/gateway#connections[/url]
 
+# TODO:
+# - Move Gateway URL request to DiscordAPI
+
 signal bot_ready(event: ReadyEvent)
 signal message_create(event: MessageCreateEvent)
 
@@ -28,6 +31,7 @@ const BASE_URL := 'https://discord.com/api/v10'
 
 var _http: AwaitableHTTPRequest
 var _socket: BetterWebsocket
+var _api: DiscordAPI
 var _heartbeat_timer: Timer
 var _token: String
 var _app_id: int
@@ -61,7 +65,10 @@ func start(token: String, app_id: int) -> void:
 	_token = token
 	_app_id = app_id
 
-	var r := await _http.async_request(BASE_URL+'/gateway/bot', HTTPClient.METHOD_GET, DiscordAPI.headers(_token))
+	_api = DiscordAPI.new(_token, _app_id)
+	add_child(_api)
+
+	var r := await _http.async_request(BASE_URL+'/gateway/bot', HTTPClient.METHOD_GET, _api.headers())
 	assert(r.success and r.status_code == 200, 'Gateway URL request failed')
 
 	_socket_url = (r.json as Dictionary).get('url') as String + '/?v=10&encoding=json'

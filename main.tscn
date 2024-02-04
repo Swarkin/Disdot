@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckriojympegml"]
+[gd_scene load_steps=3 format=3 uid="uid://ckriojympegml"]
 
 [ext_resource type="Script" path="res://disdot/disdot.gd" id="1_s6g8u"]
-[ext_resource type="Script" path="res://disdot/discord_api.gd" id="2_qxrsa"]
 [ext_resource type="Script" path="res://user.gd" id="4_vyixc"]
 
 [node name="Main" type="Node"]
@@ -9,13 +8,9 @@
 [node name="Disdot" type="Node" parent="."]
 script = ExtResource("1_s6g8u")
 
-[node name="DiscordAPI" type="Node" parent="."]
-script = ExtResource("2_qxrsa")
-
-[node name="User" type="Node" parent="." node_paths=PackedStringArray("disdot", "discord_api")]
+[node name="User" type="Node" parent="." node_paths=PackedStringArray("disdot")]
 script = ExtResource("4_vyixc")
 disdot = NodePath("../Disdot")
-discord_api = NodePath("../DiscordAPI")
 
 [connection signal="bot_ready" from="Disdot" to="User" method="_on_disdot_bot_ready"]
 [connection signal="message_create" from="Disdot" to="User" method="_on_disdot_message_create"]

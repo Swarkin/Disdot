@@ -3,7 +3,6 @@ extends Node
 const ENV_PATH := '.env'
 
 @export var disdot: Disdot
-@export var discord_api: DiscordAPI
 
 
 func _ready() -> void:
@@ -14,8 +13,8 @@ func _ready() -> void:
 		return
 
 	var token := cfg.get_value('Bot', 'Token', '') as String
-	assert(not token.is_empty(), 'Invalid Bot Token')
 	var app_id := cfg.get_value('Bot', 'AppID', '') as int
+	assert(not token.is_empty(), 'Invalid Bot Token')
 	assert(app_id, 'Invalid App ID')
 
 	disdot.start(token, app_id)
@@ -23,6 +22,9 @@ func _ready() -> void:
 
 func _on_disdot_bot_ready(event: ReadyEvent) -> void:
 	pass
+	print('Trying to send message')
+	var r := await disdot._api.create_message(1197089702789009458, 'Test')
+	breakpoint
 
 func _on_disdot_message_create(event: MessageCreateEvent) -> void:
 	pass
