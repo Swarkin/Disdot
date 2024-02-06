@@ -6,7 +6,8 @@ extends BetterBaseClass
 func _init(d: Dictionary) -> void:
 	v = _safe_get(d, 'v', 0) as int
 	user = User.new(_safe_get(d, 'user', {}) as Dictionary)
-	for guild_data: Dictionary in _safe_get(d, 'guilds', {}): guilds.append(Guild.new(guild_data))
+	for guild_data: Dictionary in _safe_get(d, 'guilds', []) as Array[Dictionary]:
+		guilds.append(UnavailableGuild.new(guild_data))
 	session_id = _safe_get(d, 'session_id', '') as String
 	resume_gateway_url = _safe_get(d, 'resume_gateway_url', '') as String
 	#shard
