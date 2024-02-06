@@ -9,13 +9,13 @@ func _init(d: Dictionary) -> void:
 	for guild_data: Dictionary in _safe_get(d, 'guilds', {}): guilds.append(Guild.new(guild_data))
 	session_id = _safe_get(d, 'session_id', '') as String
 	resume_gateway_url = _safe_get(d, 'resume_gateway_url', '') as String
-	##shard
-	##application
+	#shard
+	#application
 
-var v: int											## API version
-var user: User									## Information about the user including email
-var guilds: Array[Guild]				## Guilds the user is in
-var session_id: String					## Used for resuming connections
-var resume_gateway_url: String	## Gateway URL for resuming connections
-var shard: Array[int]						## Shard information associated with this session, if sent when identifying
-var application: Dictionary			## Contains id and flags
+var v: int													## API version
+var user: User											## Information about the user including email
+var guilds: Array[UnavailableGuild]	## Guilds the user is in
+var session_id: String							## Used for resuming connections
+var resume_gateway_url: String			## Gateway URL for resuming connections
+var shard: Array[int]								## Shard information associated with this session, if sent when identifying
+var application: Dictionary					## Contains id and flags
