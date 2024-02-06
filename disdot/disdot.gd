@@ -85,7 +85,7 @@ func stop() -> void:
 
 func _on_packet_received(p: PackedByteArray) -> void:
 	var packet_str := p.get_string_from_utf8()
-	print_rich('[color=webgray]Packet received: ', packet_str, '[/color]')
+	if verbose: print_rich('[color=webgray]>>> ', packet_str, '[/color]')
 
 	var json := JSON.parse_string(packet_str) as Dictionary
 	strip_packet_recursive(json, '_trace')
@@ -137,7 +137,7 @@ func _on_packet_received(p: PackedByteArray) -> void:
 			if verbose: print('Heartbeat ACK received')
 
 		_:
-			print('Unhandled Opcode: ', op)
+			if verbose: print('Unhandled Opcode: ', op)
 
 func _on_state_changed(state: WebSocketPeer.State) -> void:
 	print('Websocket state changed: ', state)
