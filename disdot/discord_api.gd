@@ -10,6 +10,7 @@ var _app_id: int
 # - Return types
 #  - Classes
 #   - ...
+# - Static and async HTTPRequest Node
 # - Optional fields
 
 func _init(token := '', app_id := 0) -> void:
