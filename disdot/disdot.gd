@@ -9,19 +9,38 @@ signal bot_ready(event: ReadyEvent)
 signal message_create(event: MessageCreateEvent)
 
 enum Op {
-	Invalid = -1,
-	Dispatch = 0,
-	Heartbeat = 1,
-	Identify = 2,
-	PresenceUpdate = 3,
-	VoiceStateUpdate = 4,
-
-	Resume = 6,
-	Reconnect = 7,
-	RequestGuildMembers = 8,
-	InvalidSession = 9,
-	Hello = 10,
-	HeartbeatACK = 11}
+	INVALID = -1,
+	DISPATCH = 0,
+	HEARTBEAT = 1,
+	IDENTIFY = 2,
+	PRESENCE_UPDATE = 3,
+	VOICE_STATE_UPDATE = 4,
+	RESUME = 6,
+	RECONNECT = 7,
+	REQUEST_GUILD_MEMBERS = 8,
+	INVALID_SESSION = 9,
+	HELLO = 10,
+	HEARTBEAT_ACK = 11 }
+enum Intents { ## Gateway Intents[br][url=https://discord.com/developers/docs/topics/gateway#gateway-intents]View Documentation[/url]
+	GUILDS = 1 << 0,
+	GUILD_MEMBERS = 1 << 1,
+	GUILD_MODERATION = 1 << 2,
+	GUILD_EMOJIS_AND_STICKERS = 1 << 3,
+	GUILD_INTEGRATIONS = 1 << 4,
+	GUILD_WEBHOOKS = 1 << 5,
+	GUILD_INVITES = 1 << 6,
+	GUILD_VOICE_STATES = 1 << 7,
+	GUILD_PRESENCES = 1 << 8,
+	GUILD_MESSAGES = 1 << 9,
+	GUILD_MESSAGE_REACTIONS = 1 << 10,
+	GUILD_MESSAGE_TYPING = 1 << 11,
+	DIRECT_MESSAGES = 1 << 12,
+	DIRECT_MESSAGE_REACTIONS = 1 << 13,
+	DIRECT_MESSAGE_TYPING = 1 << 14,
+	MESSAGE_CONTENT = 1 << 15,
+	GUILD_SCHEDULED_EVENTS = 1 << 16,
+	AUTO_MODERATION_CONFIGURATION = 1 << 20,
+	AUTO_MODERATION_EXECUTION = 1 << 21 }
 class Event:
 	const Ready := 'READY'
 	const MessageCreate := 'MESSAGE_CREATE'
@@ -31,12 +50,16 @@ const BASE_URL := 'https://discord.com/api/v10'
 
 var _http: AwaitableHTTPRequest
 var _socket: BetterWebsocket
-var _api: DiscordAPI
 var _heartbeat_timer: Timer
-var _token: String
-var _app_id: int
+var _api: DiscordAPI
+
 var _socket_url: String
 var _last_seq_num: int
+
+var _token: String
+var _app_id: int
+var _intents: int
+
 
 func _init() -> void:
 	_http = AwaitableHTTPRequest.new()
@@ -59,11 +82,16 @@ func _input(event: InputEvent) -> void:
 		stop()
 
 
-func start(token: String, app_id: int) -> void:
+func start(token: String, app_id: int, intents: int) -> void:
 	if verbose: print('Starting')
+
+	assert(not token.is_empty(), 'Invalid Bot Token')
+	assert(app_id, 'Invalid App ID')
+	assert(intents >= 0, 'Invalid Intents')
 
 	_token = token
 	_app_id = app_id
+	_intents = intents
 
 	_api = DiscordAPI.new(_token, _app_id)
 	add_child(_api)
@@ -94,7 +122,7 @@ func _on_packet_received(p: PackedByteArray) -> void:
 	assert(not op == -1)
 
 	match op:
-		Op.Dispatch:
+		Op.DISPATCH:
 			_update_seq_num(json.get('s'))
 
 			var event_data := json.get('d') as Dictionary
@@ -120,11 +148,11 @@ func _on_packet_received(p: PackedByteArray) -> void:
 
 			if verbose: print('└──────────────────────────┘')
 
-		Op.Hello:
+		Op.HELLO:
 			if verbose: print('Hello Opcode received')
 			var d := json.get('d') as Dictionary
 
-			var interval_s := (d.get('heartbeat_interval') as int) * 0.001
+			var interval_s := (d.get('heartbeat_interval') as float) * 0.001
 			assert(interval_s > 10.0, 'Heartbeat interval likely too low')
 
 			_heartbeat()
@@ -133,8 +161,8 @@ func _on_packet_received(p: PackedByteArray) -> void:
 			if verbose: print('Starting Heartbeat Timer with interval ', interval_s, 's')
 			_heartbeat_timer.start(interval_s)
 
-		Op.HeartbeatACK:
-			if verbose: print('Heartbeat ACK received')
+		Op.HEARTBEAT_ACK:
+			if verbose:print_rich('[color=webgray]>>> Heartbeat ACK[/color]')
 
 		_:
 			if verbose: print('Unhandled Opcode: ', op)
@@ -147,17 +175,17 @@ func _heartbeat() -> void:
 
 	@warning_ignore('incompatible_ternary')
 	_socket.send_packet(JSON.stringify({
-		'op': 1, 'd': _last_seq_num if _last_seq_num else null})
+		'op': Op.HEARTBEAT, 'd': _last_seq_num if _last_seq_num else null})
 	)
 
 func _identify() -> void:
-	if verbose: print('Identify')
+	if verbose: print('Identify with intents ', _intents)
 
 	_socket.send_packet(JSON.stringify({
-		'op': Op.Identify,
+		'op': Op.IDENTIFY,
 		'd': {
 			'token': _token,
-			'intents': 1 << 9,
+			'intents': _intents,
 			'properties': {
 				'os': 'linux',
 				'browser': 'disdot',
