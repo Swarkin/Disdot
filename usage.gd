@@ -14,10 +14,13 @@ func _ready() -> void:
 
 	var token := cfg.get_value('Bot', 'Token', '') as String
 	var app_id := cfg.get_value('Bot', 'AppID', '') as int
-	assert(not token.is_empty(), 'Invalid Bot Token')
-	assert(app_id, 'Invalid App ID')
 
-	disdot.start(token, app_id)
+	const I := disdot.Intents
+	disdot.start(
+		token,
+		app_id,
+		I.GUILDS | I.GUILD_MESSAGES
+	)
 
 
 func _on_disdot_bot_ready(event: ReadyEvent) -> void:
