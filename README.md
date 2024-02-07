@@ -8,14 +8,13 @@
 
 ## Features
 
-### Events
+### Events 🚧
 
 | Name |  |
 | --- | :-: |
 | `READY`  | ✔️ |
 | `MESSAGE_CREATE`  | ✔️ |
-| `MESSAGE_UPDATE` | 🚧 |
-| `MESSAGE_DELETE` | 🚧 |
+| `GUILD_CREATE` | ✔️ |
 
 ---
 
