@@ -4,6 +4,7 @@ extends Node
 
 signal bot_ready(event: ReadyEvent)
 signal message_create(event: MessageCreateEvent)
+signal guild_create(event: GuildCreateEvent)
 
 enum Op {
 	INVALID = -1,
@@ -139,6 +140,10 @@ func _on_packet_received(p: PackedByteArray) -> void:
 				Event.MESSAGE_CREATE:
 					var event := MessageCreateEvent.new(event_data)
 					message_create.emit(event)
+
+				Event.GUILD_CREATE:
+					var event := GuildCreateEvent.new(event_data)
+					guild_create.emit(event)
 
 				_:
 					if verbose: print('└─────── Unhandled ────────┘')
