@@ -60,6 +60,11 @@ func headers(json_content := true) -> PackedStringArray:
 	return h
 
 
+func get_gateway_bot() -> AwaitableHTTPRequest.HTTPResult:
+	var url := join_url([BASE_URL, 'gateway', 'bot'])
+	return await _request(url, HTTPClient.METHOD_GET, headers())
+
+
 func create_message(channel_id: int, content: String) -> AwaitableHTTPRequest.HTTPResult:
 	var url := join_url([BASE_URL, 'channels', str(channel_id), 'messages'])
 
@@ -72,13 +77,11 @@ func create_message(channel_id: int, content: String) -> AwaitableHTTPRequest.HT
 
 func get_guild_application_commands(guild_id: int, _localizations := false) -> AwaitableHTTPRequest.HTTPResult:
 	var url := join_url([BASE_URL, 'applications', str(_app_id), 'guilds', str(guild_id), 'commands'])
-
 	return await _request(url, HTTPClient.METHOD_GET, headers())
 
 @warning_ignore('shadowed_variable_base_class')
 func create_guild_application_command(guild_id: int, name: String) -> AwaitableHTTPRequest.HTTPResult:
 	var url := join_url([BASE_URL, 'applications', str(_app_id), 'guilds', str(guild_id), 'commands'])
-
 	return await _request(url, HTTPClient.METHOD_POST, headers(),
 		JSON.stringify({
 			'name': name,
