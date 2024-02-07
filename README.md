@@ -1,7 +1,7 @@
 # Disdot: Discord bot library written in GDScript
 <sup>Currently using Godot 4.3.dev2</sup>
 
-> [!WARNING]  
+> [!NOTE]  
 > Just like most of my other projects, this is still in early development.
 
 ---
@@ -16,15 +16,6 @@
 | `MESSAGE_CREATE`  | ✔️ |
 | `MESSAGE_UPDATE` | 🚧 |
 | `MESSAGE_DELETE` | 🚧 |
-| ... | 🚧 |
-
-### Discord Rest API
-
-🚧 WIP
-
-### Ratelimits
-
-❌ Currently not implemented
 
 ---
 
