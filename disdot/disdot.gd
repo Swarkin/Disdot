@@ -39,8 +39,9 @@ enum Intents { ## Gateway Intents[br][url=https://discord.com/developers/docs/to
 	AUTO_MODERATION_CONFIGURATION = 1 << 20,
 	AUTO_MODERATION_EXECUTION = 1 << 21 }
 class Event:
-	const Ready := 'READY'
-	const MessageCreate := 'MESSAGE_CREATE'
+	const READY := 'READY'
+	const MESSAGE_CREATE := 'MESSAGE_CREATE'
+	const GUILD_CREATE := 'GUILD_CREATE'
 
 const BASE_URL := 'https://discord.com/api/v10'
 @export var verbose := true
@@ -131,11 +132,11 @@ func _on_packet_received(p: PackedByteArray) -> void:
 				print('│ ', event_data)
 
 			match event_name:
-				Event.Ready:
+				Event.READY:
 					var event := ReadyEvent.new(event_data)
 					bot_ready.emit(event)
 
-				Event.MessageCreate:
+				Event.MESSAGE_CREATE:
 					var event := MessageCreateEvent.new(event_data)
 					message_create.emit(event)
 
