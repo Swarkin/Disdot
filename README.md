@@ -10,13 +10,22 @@
 
 ### Events
 
-| Name | Implemented |
-| --- | --- |
-| `READY`  | ✅ |
-| `MESSAGE_CREATE`  | ✅ |
-| `MESSAGE_UPDATE` | 🔁 |
-| `MESSAGE_DELETE` | 🔁 |
+| Name |  |
+| --- | :-: |
+| `READY`  | ✔️ |
+| `MESSAGE_CREATE`  | ✔️ |
+| `MESSAGE_UPDATE` | 🚧 |
+| `MESSAGE_DELETE` | 🚧 |
+| ... | 🚧 |
+
+### Discord Rest API
+
+🚧 WIP
+
+### Ratelimits
+
+❌ Currently not implemented
 
 ---
 
-🦊❤️
+### 🦊❤️
