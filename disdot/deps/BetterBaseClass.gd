@@ -56,4 +56,4 @@ func _to_string() -> String:
 		if p.get('usage') == PROPERTY_USAGE_SCRIPT_VARIABLE:
 			s += p.get('name')+' = '+str(self[p.get('name')])+SEP
 
-	return s.trim_suffix(SEP)
+	return '['+s.trim_suffix(SEP)+']'
