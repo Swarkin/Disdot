@@ -21,7 +21,7 @@ func _on_bot_ready(event: ReadyEvent) -> void:
 
 	ui_user.username_label.text = event.user.username
 
-	for guild: Guild in event.guilds:
+	for guild: UnavailableGuild in event.guilds:
 		ui_guilds.add_guild(guild.id)
 
 func _on_message_create(event: MessageCreateEvent) -> void:
