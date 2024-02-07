@@ -1,5 +1,5 @@
 class_name MessageCreateEvent
-extends BetterBaseClass
+extends BaseEvent
 
 # TODO
 func _init(d: Dictionary) -> void:
