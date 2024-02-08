@@ -4,7 +4,7 @@ extends BaseGuild
 
 # TODO
 func _init(d: Dictionary) -> void:
-	id = _safe_get(d, 'id', 0) as int
+	super(d)
 	name = _safe_get(d, 'name', '') as String
 	icon = _safe_get(d, 'icon', '') as String
 	icon_hash = _safe_get(d, 'icon_hash', '') as String
@@ -20,7 +20,6 @@ func _init(d: Dictionary) -> void:
 	#...
 
 
-var id: int								## guild id
 var name: String						## guild name (2-100 characters, excluding trailing and leading whitespace)
 var icon: String						## icon hash
 var icon_hash: String					## icon hash, returned when in the template object
