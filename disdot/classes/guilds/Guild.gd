@@ -1,5 +1,5 @@
 class_name Guild
-extends BetterBaseClass
+extends BaseGuild
 ## Guilds in Discord represent an isolated collection of users and channels, and are often referred to as "servers" in the UI.[br][url]https://discord.com/developers/docs/resources/guild[/url]
 
 # TODO
