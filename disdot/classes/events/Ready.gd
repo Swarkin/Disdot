@@ -13,10 +13,10 @@ func _init(d: Dictionary) -> void:
 	#shard
 	#application
 
-var v: int													## API version
-var user: User											## Information about the user including email
+var v: int							## API version
+var user: User						## Information about the user including email
 var guilds: Array[UnavailableGuild]	## Guilds the user is in
-var session_id: String							## Used for resuming connections
-var resume_gateway_url: String			## Gateway URL for resuming connections
-var shard: Array[int]								## Shard information associated with this session, if sent when identifying
-var application: Dictionary					## Contains id and flags
+var session_id: String				## Used for resuming connections
+var resume_gateway_url: String		## Gateway URL for resuming connections
+var shard: Array[int]				## Shard information associated with this session, if sent when identifying
+var application: Dictionary			## Contains id and flags
