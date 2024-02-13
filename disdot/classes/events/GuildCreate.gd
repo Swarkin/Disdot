@@ -12,7 +12,8 @@ func _init(d: Dictionary) -> void:
 	voice_states = _safe_get(d, 'voice_states', []) as Array
 	for member_data: Dictionary in _safe_get(d, 'members', []) as Array[Dictionary]:
 		members.append(GuildMember.new(member_data))
-	channels = _safe_get(d, 'channels', []) as Array
+	for channel_data: Dictionary in _safe_get(d, 'channels', []) as Array[Dictionary]:
+		channels.append(Channel.new(channel_data))
 	threads = _safe_get(d, 'threads', []) as Array
 	presences = _safe_get(d, 'presences', []) as Array
 	stage_instances = _safe_get(d, 'stage_instances', []) as Array
@@ -25,7 +26,7 @@ var unavailable: bool
 var member_count: int
 var voice_states: Array
 var members: Array[GuildMember]
-var channels: Array#[Channel]
+var channels: Array[Channel]
 var threads: Array#[Channel]
 var presences: Array#[PresenceUpdate]
 var stage_instances: Array#[StageInstance]
