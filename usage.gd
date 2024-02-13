@@ -24,4 +24,8 @@ func _ready() -> void:
 
 
 func _on_disdot_bot_ready(event: ReadyEvent) -> void:
-	print(event.user.username, ' is ready!')
+	pass
+
+
+func _on_disdot_message_create(event: MessageCreateEvent) -> void:
+	pass
