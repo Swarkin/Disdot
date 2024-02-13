@@ -35,8 +35,6 @@ gdscript/warnings/inference_on_variant=0
 
 [display]
 
-window/size/viewport_width=1200
-window/size/viewport_height=600
 window/vsync/vsync_mode=0
 
 [editor_plugins]
