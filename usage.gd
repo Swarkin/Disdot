@@ -27,5 +27,10 @@ func _on_disdot_bot_ready(event: ReadyEvent) -> void:
 	pass
 
 
+func _on_disdot_guild_create(event: GuildCreateEvent) -> void:
+	pass
+
+
 func _on_disdot_message_create(event: MessageCreateEvent) -> void:
 	pass
+

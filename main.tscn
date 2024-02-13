@@ -13,4 +13,5 @@ script = ExtResource("4_vyixc")
 disdot = NodePath("../Disdot")
 
 [connection signal="bot_ready" from="Disdot" to="Usage" method="_on_disdot_bot_ready"]
+[connection signal="guild_create" from="Disdot" to="Usage" method="_on_disdot_guild_create"]
 [connection signal="message_create" from="Disdot" to="Usage" method="_on_disdot_message_create"]
