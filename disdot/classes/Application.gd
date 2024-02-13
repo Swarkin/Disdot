@@ -7,7 +7,7 @@ func _init(d: Dictionary) -> void:
 	name = _safe_get(d, 'name', '') as String
 	icon = _safe_get(d, 'icon', '') as String
 	description = _safe_get(d, 'description', '') as String
-	rpc_origins = _safe_get(d, 'rpc_origins', []) as Array[String]
+	rpc_origins = PackedStringArray(_safe_get(d, 'rpc_origins', []) as Array[String])
 	bot_public = _safe_get(d, 'bot_public', false) as bool
 	bot_require_code_grant = _safe_get(d, 'bot_require_code_grant', false) as bool
 	bot = User.new(_safe_get(d, 'bot', {}) as Dictionary)
@@ -24,10 +24,10 @@ func _init(d: Dictionary) -> void:
 	cover_image = _safe_get(d, 'cover_image', '') as String
 	flags = _safe_get(d, 'flags', 0) as int
 	approximate_guild_count = _safe_get(d, 'approximate_guild_count', 0) as int
-	redirect_uris = _safe_get(d, 'redirect_uris', []) as Array[String]
+	redirect_uris = PackedStringArray(_safe_get(d, 'redirect_uris', []) as Array[String])
 	interactions_endpoint_url = _safe_get(d, 'interactions_endpoint_url', '') as String
 	role_connections_verification_url = _safe_get(d, 'role_connections_verification_url', '') as String
-	tags = _safe_get(d, 'tags', []) as Array[String]
+	tags = PackedStringArray(_safe_get(d, 'tags', []) as Array[String])
 	install_params = InstallParams.new(_safe_get(d, 'install_params', {}) as Dictionary)
 	custom_install_url = _safe_get(d, 'custom_install_url', '') as String
 
@@ -35,7 +35,7 @@ var id: int
 var name: String
 var icon: String
 var description: String
-var rpc_origins: Array[String]
+var rpc_origins: PackedStringArray
 var bot_public: bool
 var bot_require_code_grant: bool
 var bot: User
@@ -53,9 +53,9 @@ var slug: String
 var cover_image: String
 var flags: int
 var approximate_guild_count: int
-var redirect_uris: Array[String]
+var redirect_uris: PackedStringArray
 var interactions_endpoint_url: String
 var role_connections_verification_url: String
-var tags: Array[String]
+var tags: PackedStringArray
 var install_params: InstallParams
 var custom_install_url: String

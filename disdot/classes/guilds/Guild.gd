@@ -4,7 +4,7 @@ extends BaseGuild
 
 # TODO
 func _init(d: Dictionary) -> void:
-	super(d)
+	id = _safe_get(d, 'id', 0) as int
 	name = _safe_get(d, 'name', '') as String
 	icon = _safe_get(d, 'icon', '') as String
 	icon_hash = _safe_get(d, 'icon_hash', '') as String
@@ -17,9 +17,36 @@ func _init(d: Dictionary) -> void:
 	afk_channel_id = _safe_get(d, 'afk_channel_id', 0) as int
 	afk_timeout = _safe_get(d, 'afk_timeout', 0) as int
 	widget_enabled = _safe_get(d, 'widget_enabled', false) as bool
-	#...
+	widget_channel_id = _safe_get(d, 'widget_channel_id', 0) as int
+	verification_level = _safe_get(d, 'verification_level', 0) as int
+	default_message_notifications = _safe_get(d, 'default_message_notifications', 0) as int
+	explicit_content_filter = _safe_get(d, 'explicit_content_filter', 0) as int
+	roles = _safe_get(d, 'roles', []) as Array#[Role]
+	emojis = _safe_get(d, 'emojis', []) as Array#[Emoji]
+	features = PackedStringArray(_safe_get(d, 'features', []) as Array[String])
+	mfa_level = _safe_get(d, 'mfa_level', 0) as int
+	application_id = _safe_get(d, 'application_id', 0) as int
+	system_channel_id = _safe_get(d, 'system_channel_id', 0) as int
+	rules_channel_id = _safe_get(d, 'rules_channel_id', 0) as int
+	max_presences = _safe_get(d, 'max_presences', 0) as int
+	max_members = _safe_get(d, 'max_members', 0) as int
+	vanity_url_code = _safe_get(d, 'vanity_url_code', '') as String
+	description = _safe_get(d, 'description', '') as String
+	banner = _safe_get(d, 'banner', '') as String
+	premium_tier = _safe_get(d, 'premium_tier', 0) as int
+	premium_subscription_count = _safe_get(d, 'premium_subscription_count', 0) as int
+	preferred_locale = _safe_get(d, 'preferred_locale', '') as String
+	public_updates_channel_id = _safe_get(d, 'public_updates_channel_id', 0) as int
+	max_video_channel_users = _safe_get(d, 'max_video_channel_users', 0) as int
+	max_stage_video_channel_users = _safe_get(d, 'max_stage_video_channel_users', 0) as int
+	approximate_member_count = _safe_get(d, 'approximate_member_count', 0) as int
+	welcome_screen = _safe_get(d, 'welcome_screen', {}) as Dictionary
+	nsfw_level = _safe_get(d, 'nsfw_level', 0) as int
+	stickers = _safe_get(d, 'stickers', []) as Array
+	premium_progress_bar_enabled = _safe_get(d, 'premium_progress_bar_enabled', false) as bool
+	safety_alerts_channel_id = _safe_get(d, 'safety_alerts_channel_id', 0) as int
 
-
+var id: int								## guild id
 var name: String						## guild name (2-100 characters, excluding trailing and leading whitespace)
 var icon: String						## icon hash
 var icon_hash: String					## icon hash, returned when in the template object
@@ -42,7 +69,7 @@ var explicit_content_filter: int		## explicit content filter level
 var roles: Array#[Role]
 ## custom guild emojis
 var emojis: Array#[Emoji]
-var features: Array[String]				## enabled guild features
+var features: PackedStringArray			## enabled guild features
 var mfa_level: int						## required MFA level for the guild
 var application_id: int					## application id of the guild creator if it is bot-created
 var system_channel_id: int				## the id of the channel where guild notices such as welcome messages and boost events are posted
