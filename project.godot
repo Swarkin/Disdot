@@ -37,10 +37,6 @@ gdscript/warnings/inference_on_variant=0
 
 window/vsync/vsync_mode=0
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
-
 [filesystem]
 
 import/blender/enabled=false
