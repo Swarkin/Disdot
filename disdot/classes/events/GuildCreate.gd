@@ -14,8 +14,10 @@ func _init(d: Dictionary) -> void:
 		members.append(GuildMember.new(member_data))
 	for channel_data: Dictionary in _safe_get(d, 'channels', []) as Array[Dictionary]:
 		channels.append(Channel.new(channel_data))
-	threads = _safe_get(d, 'threads', []) as Array
-	presences = _safe_get(d, 'presences', []) as Array
+	for thread_data: Dictionary in _safe_get(d, 'threads', []) as Array[Dictionary]:
+		threads.append(Channel.new(thread_data))
+	for presence_data: Dictionary in _safe_get(d, 'presences', []) as Array[Dictionary]:
+		presences.append(PresenceUpdateEvent.new(presence_data))
 	stage_instances = _safe_get(d, 'stage_instances', []) as Array
 	guild_scheduled_events = _safe_get(d, 'guild_scheduled_events', []) as Array
 
@@ -27,7 +29,7 @@ var member_count: int
 var voice_states: Array
 var members: Array[GuildMember]
 var channels: Array[Channel]
-var threads: Array#[Channel]
-var presences: Array#[PresenceUpdate]
+var threads: Array[Channel]
+var presences: Array[PresenceUpdateEvent]
 var stage_instances: Array#[StageInstance]
 var guild_scheduled_events: Array#[GuildScheduledEvent]
