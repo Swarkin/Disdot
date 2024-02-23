@@ -1,11 +1,17 @@
-script_properties = """
-var test: int
-"""
-output_file = open('C:/Users/Me/Desktop/out.gd', 'w')
+from pyperclip import copy
 
-output_file.write('func _init(d: Dictionary) -> void:\n')
+script = 'func _init(d: Dictionary) -> void:\n'
+variables = ''
 
-for line in script_properties.strip().split('\n'):
+while True:
+	content = input()+'\n'
+	if content == '\n':
+		break
+	else:
+		variables += content
+
+
+for line in variables.strip().split('\n'):
 	var_name = line.split('var ')[1].split(': ')[0]
 	var_type = line.split(': ')[1]
 	var_default = "''" if var_type == 'String' \
@@ -15,4 +21,6 @@ for line in script_properties.strip().split('\n'):
 	        else '{}' if var_type.startswith('Dictionary') \
 	        else None
 
-	output_file.write(f"	{var_name} = _safe_get(d, '{var_name}', {var_default}) as {var_type}"+'\n')
+	script += f"	{var_name} = _safe_get(d, '{var_name}', {var_default}) as {var_type}"+'\n'
+
+copy(script)
