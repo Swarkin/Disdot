@@ -42,7 +42,7 @@ var id: int
 var type: int
 var guild_id: int
 var position: int
-var permission_overwrites: Array#[Overwrite]
+var permission_overwrites: Array
 var name: String
 var topic: String
 var nsfw: bool
@@ -73,3 +73,6 @@ var default_reaction_emoji: Dictionary
 var default_thread_rate_limit_per_user: int
 var default_sort_order: int
 var default_forum_layout: int
+
+func create_message(content: String) -> AwaitableHTTPRequest.HTTPResult:
+	return await Discord.create_message(id, content)
