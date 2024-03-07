@@ -19,7 +19,7 @@ for line in variables.strip().split('\n'):
 	        else 'false' if var_type == 'bool' \
 	        else '[]' if (var_type.startswith('Array') or var_type.startswith('Packed')) \
 	        else '{}' if var_type.startswith('Dictionary') \
-	        else None
+	        else 'null'
 
 	script += f"	{var_name} = _safe_get(d, '{var_name}', {var_default}) as {var_type}"+'\n'
 
