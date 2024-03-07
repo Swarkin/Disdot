@@ -24,6 +24,10 @@ boot_splash/use_filter=false
 
 driver/driver="Dummy"
 
+[autoload]
+
+Discord="*res://disdot/discord_api.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=1

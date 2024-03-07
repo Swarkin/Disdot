@@ -10,14 +10,14 @@ var _app_id: int
 # - Return types
 #  - Classes
 #   - ...
-# - Static and async HTTPRequest Node
-# - Optional fields
+# - Optional fields ("Optional" type using structs?)
+# - (Advanced) Static and async HTTPRequest Node
 
 func _init(token := '', app_id := 0) -> void:
-	_token = token
-	_app_id = app_id
+	if token: _token = token
+	if app_id: _app_id = app_id
 
-func _enter_tree() -> void:
+func _ready() -> void:
 	assert(_token and _app_id)
 
 
