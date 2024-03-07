@@ -50,7 +50,6 @@ const BASE_URL := 'https://discord.com/api/v10'
 var _http: AwaitableHTTPRequest
 var _socket: BetterWebsocket
 var _heartbeat_timer: Timer
-var _api: DiscordAPI
 
 var _socket_url: String
 var _last_seq_num: int
@@ -92,10 +91,7 @@ func start(token: String, app_id: int, intents: int) -> void:
 	_app_id = app_id
 	_intents = intents
 
-	_api = DiscordAPI.new(_token, _app_id)
-	add_child(_api)
-
-	var r := await _api.get_gateway_bot()
+	var r := await Discord.get_gateway_bot()
 	assert(r.success and r.status_code == 200, 'Gateway URL request failed')
 
 	_socket_url = (r.json as Dictionary).get('url') as String + '/?v=10&encoding=json'
