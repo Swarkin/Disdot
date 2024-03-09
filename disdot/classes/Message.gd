@@ -36,7 +36,6 @@ func _init(d: Dictionary) -> void:
 	role_subscription_data = _safe_get(d, 'role_subscription_data', {}) as Dictionary
 	resolved = _safe_get(d, 'resolved', {}) as Dictionary
 
-
 var id: int
 var channel_id: int
 var author: Dictionary
