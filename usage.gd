@@ -17,9 +17,7 @@ func _ready() -> void:
 
 	const I := disdot.Intents
 	disdot.start(
-		token,
-		app_id,
-		I.GUILDS | I.GUILD_MESSAGES
+		I.GUILDS | I.GUILD_MESSAGES | I.MESSAGE_CONTENT
 	)
 
 
