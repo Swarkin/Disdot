@@ -1,6 +1,9 @@
 # Disdot: Discord bot framework written in GDScript
 <sup>Currently using Godot 4.3.dev4</sup>
 
+> [!WARNING]
+> Project is on hold until nullable statically typed variables are implemented into Godot.
+
 > [!NOTE]  
 > Just like most of my other projects, this is still in **early development** and not production ready.
 
