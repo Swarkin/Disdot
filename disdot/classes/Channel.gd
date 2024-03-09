@@ -1,6 +1,9 @@
 class_name Channel
 extends BetterBaseClass
 
+# TODO:
+#  - Return Types
+
 func _init(d: Dictionary) -> void:
 	id = _safe_get(d, 'id', 0) as int
 	type = _safe_get(d, 'type', 0) as int
@@ -74,5 +77,11 @@ var default_thread_rate_limit_per_user: int
 var default_sort_order: int
 var default_forum_layout: int
 
+func get_message(message_id: int) -> AwaitableHTTPRequest.HTTPResult:
+	return await Discord.get_message(id, message_id)
+
 func create_message(content: String) -> AwaitableHTTPRequest.HTTPResult:
 	return await Discord.create_message(id, content)
+
+func delete_message(message_id: int) -> AwaitableHTTPRequest.HTTPResult:
+	return await Discord.delete_message(id, message_id)
