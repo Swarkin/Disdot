@@ -12,8 +12,8 @@ func _ready() -> void:
 		push_error('Failed to open .env file: ', error_string(err))
 		return
 
-	var token := cfg.get_value('Bot', 'Token', '') as String
-	var app_id := cfg.get_value('Bot', 'AppID', '') as int
+	Discord.token = cfg.get_value('Bot', 'Token', '') as String
+	Discord.app_id = cfg.get_value('Bot', 'AppID', '') as int
 
 	const I := disdot.Intents
 	disdot.start(

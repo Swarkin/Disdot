@@ -54,8 +54,6 @@ var _heartbeat_timer: Timer
 var _socket_url: String
 var _last_seq_num: int
 
-var _token: String
-var _app_id: int
 var _intents: int
 
 
@@ -65,7 +63,7 @@ func _init() -> void:
 	_http.timeout = 10.0
 
 	_socket = BetterWebsocket.new()
-	_socket.verbose = true
+	if verbose: _socket.verbose = true
 	_socket.packet_received.connect(_on_packet_received)
 	_socket.state_changed.connect(_on_state_changed)
 
@@ -76,19 +74,17 @@ func _init() -> void:
 		add_child(n)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed('ui_cancel'):
+	if event.is_action_pressed(&'ui_cancel'):
 		stop()
 
 
-func start(token: String, app_id: int, intents: int) -> void:
+func start(intents: int) -> void:
 	if verbose: print('Starting')
 
-	assert(not token.is_empty(), 'Invalid Bot Token')
-	assert(app_id, 'Invalid App ID')
+	assert(not Discord.token.is_empty(), 'Invalid Bot Token')
+	assert(Discord.app_id, 'Invalid App ID')
 	assert(intents >= 0, 'Invalid Intents')
 
-	_token = token
-	_app_id = app_id
 	_intents = intents
 
 	var r := await Discord.get_gateway_bot()
@@ -183,7 +179,7 @@ func _identify() -> void:
 	_socket.send_packet(JSON.stringify({
 		'op': Op.IDENTIFY,
 		'd': {
-			'token': _token,
+			'token': Discord.token,
 			'intents': _intents,
 			'properties': {
 				'os': 'linux',
